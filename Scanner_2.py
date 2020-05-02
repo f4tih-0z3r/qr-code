@@ -1,10 +1,13 @@
 import cv2
 import pyzbar.pyzbar as pyzbar
+import time
 
 Ogrenciler=["Fatih", "Ahmet", "Mehmet", "Ayse"]
 Numaralar=["1", "2", "3", "4"]
 Durumlar=[False, False, False, False]
 GenelDurumlar=[False, False, False, False]
+
+Kapatiliyor=False
 
 cap=cv2.VideoCapture(0)
 font=cv2.FONT_HERSHEY_PLAIN
@@ -43,10 +46,22 @@ while True:
             cv2.putText(frame, str("Islem Basarili"), (50, 50), font, 3, (0, 255, 0), 3)
             Durumlar=GenelDurumlar
 
+        elif Val=="kapat":
+            cv2.putText(frame, str("Program Kapatiliyor"), (50, 50), font, 3, (0, 255, 0), 3)
+            time.sleep(2)
+
+            Kapatiliyor=True
+            break
+
         else:
             cv2.putText(frame, str("Gecersiz"), (50, 50), font, 3, (0, 0, 255), 3)
 
     cv2.imshow("Frame", frame)
+
+    if Kapatiliyor==True:
+        cap.release()
+        cv2.destroyAllWindows()
+        break
 
     key=cv2.waitKey(1)
     if key==0:
