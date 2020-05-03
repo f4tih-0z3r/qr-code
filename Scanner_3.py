@@ -58,7 +58,11 @@ while True:
 
                 Sayac+=1
 
-            print(Gelmeyenler)
+            if len(Gelmeyenler)==0:
+                print("Herkes Tam")
+
+            else:
+                print(Gelmeyenler)
 
         elif Val=="kapat":
             cv2.putText(frame, str("Program Kapatiliyor"), (50, 50), font, 3, (0, 255, 0), 3)
